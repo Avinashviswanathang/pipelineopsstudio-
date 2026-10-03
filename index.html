@@ -14,14 +14,14 @@
   <style>
     :root {
       --bg: #07111f;
-      --bg-soft: #0c1828;
+      --bg-soft: #0c1929;
       --card: #101f32;
-      --card-hover: #14263d;
-      --text: #f4f7fb;
+      --card-hover: #142941;
+      --text: #f5f7fb;
       --muted: #9eacbd;
       --line: rgba(255,255,255,0.10);
-      --accent: #67e8f9;
-      --accent-2: #8b5cf6;
+      --accent: #55e3f5;
+      --accent-2: #a7a0ff;
       --max-width: 1180px;
       --radius: 18px;
     }
@@ -37,8 +37,8 @@
     }
 
     body {
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
-        "Segoe UI", sans-serif;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system,
+        BlinkMacSystemFont, "Segoe UI", sans-serif;
       background: var(--bg);
       color: var(--text);
       line-height: 1.6;
@@ -49,19 +49,24 @@
       text-decoration: none;
     }
 
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
     .container {
       width: min(100% - 40px, var(--max-width));
       margin: 0 auto;
     }
 
-    /* Navigation */
+    /* NAVIGATION */
 
     nav {
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(7,17,31,0.86);
-      backdrop-filter: blur(14px);
+      background: rgba(7,17,31,0.88);
+      backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--line);
     }
 
@@ -73,13 +78,26 @@
       gap: 30px;
     }
 
-    .logo {
-      font-size: 20px;
-      font-weight: 750;
-      letter-spacing: -0.5px;
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
     }
 
-    .logo span {
+    .brand img {
+      width: 42px;
+      height: 42px;
+      object-fit: contain;
+      border-radius: 10px;
+    }
+
+    .brand-name {
+      font-size: 20px;
+      font-weight: 760;
+      letter-spacing: -0.6px;
+    }
+
+    .brand-name span {
       color: var(--accent);
     }
 
@@ -103,13 +121,14 @@
     }
 
     .nav-cta:hover {
-      border-color: rgba(103,232,249,0.5);
+      border-color: rgba(85,227,245,0.5);
+      background: rgba(85,227,245,0.05);
     }
 
-    /* Hero */
+    /* HERO */
 
     .hero {
-      padding: 110px 0 100px;
+      padding: 100px 0 105px;
       position: relative;
       overflow: hidden;
     }
@@ -117,14 +136,21 @@
     .hero::before {
       content: "";
       position: absolute;
-      width: 520px;
-      height: 520px;
-      right: -180px;
-      top: -160px;
-      background: rgba(103,232,249,0.08);
-      filter: blur(90px);
+      width: 620px;
+      height: 620px;
+      right: -220px;
+      top: -180px;
+      background: rgba(85,227,245,0.08);
+      filter: blur(100px);
       border-radius: 50%;
       pointer-events: none;
+    }
+
+    .hero-layout {
+      display: grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      gap: 70px;
+      align-items: center;
     }
 
     .eyebrow {
@@ -148,16 +174,21 @@
     }
 
     .hero h1 {
-      max-width: 850px;
-      font-size: clamp(46px, 7vw, 82px);
-      line-height: 0.98;
+      max-width: 820px;
+      font-size: clamp(46px, 6.7vw, 78px);
+      line-height: 0.99;
       letter-spacing: -4px;
-      font-weight: 780;
+      font-weight: 800;
       margin-bottom: 30px;
     }
 
-    .hero h1 span {
-      background: linear-gradient(90deg, var(--accent), #c4b5fd);
+    .gradient-text {
+      background: linear-gradient(
+        90deg,
+        var(--accent),
+        #88d9ff,
+        var(--accent-2)
+      );
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
@@ -166,9 +197,9 @@
     .hero p {
       max-width: 690px;
       color: var(--muted);
-      font-size: 19px;
+      font-size: 18px;
       line-height: 1.7;
-      margin-bottom: 38px;
+      margin-bottom: 36px;
     }
 
     .hero-buttons {
@@ -184,7 +215,7 @@
       padding: 14px 21px;
       border-radius: 11px;
       font-size: 15px;
-      font-weight: 650;
+      font-weight: 700;
       transition: 0.2s ease;
     }
 
@@ -206,7 +237,49 @@
       background: var(--card);
     }
 
-    /* Sections */
+    /* HERO LOGO PANEL */
+
+    .hero-visual {
+      display: flex;
+      justify-content: center;
+    }
+
+    .logo-panel {
+      width: min(100%, 360px);
+      padding: 35px;
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      background:
+        radial-gradient(
+          circle at 50% 20%,
+          rgba(85,227,245,0.10),
+          transparent 45%
+        ),
+        var(--bg-soft);
+      box-shadow: 0 30px 80px rgba(0,0,0,0.25);
+    }
+
+    .logo-panel img {
+      width: 100%;
+      max-width: 270px;
+      margin: 0 auto 28px;
+      border-radius: 18px;
+    }
+
+    .logo-panel-line {
+      height: 1px;
+      background: var(--line);
+      margin-bottom: 20px;
+    }
+
+    .logo-panel p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    /* SECTIONS */
 
     section {
       padding: 95px 0;
@@ -216,7 +289,7 @@
     .section-label {
       color: var(--accent);
       font-size: 13px;
-      font-weight: 700;
+      font-weight: 750;
       text-transform: uppercase;
       letter-spacing: 1.5px;
       margin-bottom: 15px;
@@ -236,7 +309,7 @@
       font-size: 17px;
     }
 
-    /* Problem */
+    /* PROBLEM */
 
     .problem-grid {
       margin-top: 48px;
@@ -269,7 +342,7 @@
       font-size: 15px;
     }
 
-    /* Services */
+    /* SERVICES */
 
     .services-grid {
       margin-top: 50px;
@@ -290,7 +363,7 @@
     .service:hover {
       transform: translateY(-3px);
       background: var(--card-hover);
-      border-color: rgba(103,232,249,0.22);
+      border-color: rgba(85,227,245,0.22);
     }
 
     .service-number {
@@ -310,7 +383,7 @@
       font-size: 15px;
     }
 
-    /* Who */
+    /* AUDIENCE */
 
     .audience-grid {
       margin-top: 50px;
@@ -336,13 +409,12 @@
       font-size: 14px;
     }
 
-    /* Process */
+    /* PROCESS */
 
     .process {
       margin-top: 55px;
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 0;
       border: 1px solid var(--line);
       border-radius: var(--radius);
       overflow: hidden;
@@ -375,7 +447,7 @@
       font-size: 14px;
     }
 
-    /* About */
+    /* ABOUT */
 
     .about-layout {
       display: grid;
@@ -384,31 +456,13 @@
       align-items: start;
     }
 
-    .about-box {
-      padding: 30px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: var(--card);
-    }
-
-    .about-box strong {
-      display: block;
-      font-size: 19px;
-      margin-bottom: 10px;
-    }
-
-    .about-box p {
-      color: var(--muted);
-      font-size: 15px;
-    }
-
     .about-copy p {
       color: var(--muted);
       font-size: 17px;
       margin-bottom: 18px;
     }
 
-    /* Contact */
+    /* CONTACT */
 
     .contact {
       text-align: center;
@@ -430,7 +484,7 @@
       font-size: 13px;
     }
 
-    /* Footer */
+    /* FOOTER */
 
     footer {
       border-top: 1px solid var(--line);
@@ -445,19 +499,25 @@
       gap: 20px;
     }
 
-    /* Mobile */
+    /* MOBILE */
 
-    @media (max-width: 850px) {
+    @media (max-width: 900px) {
+
       .nav-links {
         display: none;
       }
 
       .hero {
-        padding: 80px 0;
+        padding: 75px 0 80px;
       }
 
-      .hero h1 {
-        letter-spacing: -2.5px;
+      .hero-layout {
+        grid-template-columns: 1fr;
+        gap: 55px;
+      }
+
+      .hero-visual {
+        justify-content: flex-start;
       }
 
       .services-grid,
@@ -484,12 +544,23 @@
     }
 
     @media (max-width: 600px) {
+
       .container {
         width: min(100% - 28px, var(--max-width));
       }
 
+      .brand img {
+        width: 38px;
+        height: 38px;
+      }
+
+      .brand-name {
+        font-size: 17px;
+      }
+
       .hero h1 {
-        font-size: 47px;
+        font-size: 46px;
+        letter-spacing: -2.5px;
       }
 
       .hero p {
@@ -525,12 +596,19 @@
 
 <body>
 
-  <!-- Navigation -->
+  <!-- NAVIGATION -->
 
   <nav>
     <div class="container nav-inner">
-      <a href="#" class="logo">
-        Pipeline<span>Ops</span>Studio
+
+      <a href="#" class="brand">
+
+        <img src="logo.png" alt="PipelineOpsStudio logo">
+
+        <div class="brand-name">
+          Pipeline<span>Ops</span>Studio
+        </div>
+
       </a>
 
       <div class="nav-links">
@@ -540,46 +618,79 @@
         <a href="#about">About</a>
         <a href="#contact" class="nav-cta">Get in touch</a>
       </div>
+
     </div>
   </nav>
 
 
-  <!-- Hero -->
+  <!-- HERO -->
 
   <header class="hero">
-    <div class="container">
 
-      <div class="eyebrow">
-        CRM & Revenue Operations
+    <div class="container hero-layout">
+
+      <div>
+
+        <div class="eyebrow">
+          CRM & Revenue Operations
+        </div>
+
+        <h1>
+          Turn your CRM into
+          <span class="gradient-text">
+            a sales operating system.
+          </span>
+        </h1>
+
+        <p>
+          PipelineOpsStudio helps growing B2B teams bring structure to
+          Salesforce, HubSpot, sales pipelines, automation, and CRM operations.
+        </p>
+
+        <div class="hero-buttons">
+
+          <a href="#contact" class="button button-primary">
+            Start a conversation
+          </a>
+
+          <a href="#services" class="button button-secondary">
+            Explore services
+          </a>
+
+        </div>
+
       </div>
 
-      <h1>
-        Turn your CRM into
-        <span>a sales operating system.</span>
-      </h1>
 
-      <p>
-        PipelineOpsStudio helps growing B2B teams bring structure to
-        Salesforce, HubSpot, sales pipelines, automation, and CRM operations.
-      </p>
+      <div class="hero-visual">
 
-      <div class="hero-buttons">
-        <a href="#contact" class="button button-primary">
-          Start a conversation
-        </a>
+        <div class="logo-panel">
 
-        <a href="#services" class="button button-secondary">
-          Explore services
-        </a>
+          <img
+            src="logo.png"
+            alt="PipelineOpsStudio"
+          >
+
+          <div class="logo-panel-line"></div>
+
+          <p>
+            CRM systems, sales processes and automation designed
+            to help growing teams operate with greater clarity.
+          </p>
+
+        </div>
+
       </div>
 
     </div>
+
   </header>
 
 
-  <!-- Problem -->
+  <!-- PROBLEM -->
 
   <section>
+
     <div class="container">
 
       <div class="section-label">The problem</div>
@@ -632,13 +743,16 @@
         </div>
 
       </div>
+
     </div>
+
   </section>
 
 
-  <!-- Services -->
+  <!-- SERVICES -->
 
   <section id="services">
+
     <div class="container">
 
       <div class="section-label">Capabilities</div>
@@ -709,13 +823,16 @@
         </div>
 
       </div>
+
     </div>
+
   </section>
 
 
-  <!-- Who We Help -->
+  <!-- WHO WE HELP -->
 
   <section id="who">
+
     <div class="container">
 
       <div class="section-label">Who we help</div>
@@ -763,13 +880,16 @@
         </div>
 
       </div>
+
     </div>
+
   </section>
 
 
-  <!-- Process -->
+  <!-- PROCESS -->
 
   <section id="process">
+
     <div class="container">
 
       <div class="section-label">How we work</div>
@@ -797,8 +917,8 @@
           <div class="step-number">02</div>
           <h3>Architect</h3>
           <p>
-            Design processes, CRM structure and automation around the
-            way the business sells.
+            Design processes, CRM structure and automation around
+            the way the business sells.
           </p>
         </div>
 
@@ -821,21 +941,26 @@
         </div>
 
       </div>
+
     </div>
+
   </section>
 
 
-  <!-- About -->
+  <!-- ABOUT -->
 
   <section id="about">
+
     <div class="container about-layout">
 
       <div>
+
         <div class="section-label">About</div>
 
         <h2 class="section-heading">
           A focused approach to CRM operations.
         </h2>
+
       </div>
 
       <div class="about-copy">
@@ -848,8 +973,7 @@
 
         <p>
           The focus is on practical CRM systems, cleaner processes,
-          useful automation and better visibility across the sales
-          pipeline.
+          useful automation and better visibility across the sales pipeline.
         </p>
 
         <p>
@@ -860,12 +984,14 @@
       </div>
 
     </div>
+
   </section>
 
 
-  <!-- Contact -->
+  <!-- CONTACT -->
 
   <section id="contact" class="contact">
+
     <div class="container">
 
       <div class="section-label">Let's talk</div>
@@ -876,25 +1002,27 @@
 
       <p class="section-intro">
         Tell us what you're trying to improve. We'll use the
-        information to understand the problem and determine the
-        next step.
+        information to understand the problem and determine the next step.
       </p>
 
-      <a href="#contact" class="button button-primary">
+      <a href="mailto:hello@pipelineopsstudio.com"
+         class="button button-primary">
         Start a conversation
       </a>
 
       <p class="contact-note">
-        Contact options will be added during the launch setup.
+        Email: hello@pipelineopsstudio.com
       </p>
 
     </div>
+
   </section>
 
 
-  <!-- Footer -->
+  <!-- FOOTER -->
 
   <footer>
+
     <div class="container footer-inner">
 
       <div>
@@ -906,6 +1034,7 @@
       </div>
 
     </div>
+
   </footer>
 
 </body>
