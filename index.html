@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>PipelineOpsStudio | CRM & Revenue Operations</title>
+
+  <meta
+    name="description"
+    content="PipelineOpsStudio helps growing B2B teams improve CRM operations, sales pipelines, automation, and revenue processes."
+  >
+
+  <style>
+    :root {
+      --bg: #07111f;
+      --bg-soft: #0c1828;
+      --card: #101f32;
+      --card-hover: #14263d;
+      --text: #f4f7fb;
+      --muted: #9eacbd;
+      --line: rgba(255,255,255,0.10);
+      --accent: #67e8f9;
+      --accent-2: #8b5cf6;
+      --max-width: 1180px;
+      --radius: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(100% - 40px, var(--max-width));
+      margin: 0 auto;
+    }
+
+    /* Navigation */
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(7,17,31,0.86);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav-inner {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 30px;
+    }
+
+    .logo {
+      font-size: 20px;
+      font-weight: 750;
+      letter-spacing: -0.5px;
+    }
+
+    .logo span {
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .nav-cta {
+      padding: 10px 16px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      color: var(--text) !important;
+    }
+
+    .nav-cta:hover {
+      border-color: rgba(103,232,249,0.5);
+    }
+
+    /* Hero */
+
+    .hero {
+      padding: 110px 0 100px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 520px;
+      height: 520px;
+      right: -180px;
+      top: -160px;
+      background: rgba(103,232,249,0.08);
+      filter: blur(90px);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 7px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 26px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    .hero h1 {
+      max-width: 850px;
+      font-size: clamp(46px, 7vw, 82px);
+      line-height: 0.98;
+      letter-spacing: -4px;
+      font-weight: 780;
+      margin-bottom: 30px;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(90deg, var(--accent), #c4b5fd);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero p {
+      max-width: 690px;
+      color: var(--muted);
+      font-size: 19px;
+      line-height: 1.7;
+      margin-bottom: 38px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 21px;
+      border-radius: 11px;
+      font-size: 15px;
+      font-weight: 650;
+      transition: 0.2s ease;
+    }
+
+    .button-primary {
+      background: var(--text);
+      color: var(--bg);
+    }
+
+    .button-primary:hover {
+      transform: translateY(-2px);
+    }
+
+    .button-secondary {
+      border: 1px solid var(--line);
+      color: var(--text);
+    }
+
+    .button-secondary:hover {
+      background: var(--card);
+    }
+
+    /* Sections */
+
+    section {
+      padding: 95px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .section-label {
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 15px;
+    }
+
+    .section-heading {
+      max-width: 760px;
+      font-size: clamp(34px, 5vw, 54px);
+      line-height: 1.05;
+      letter-spacing: -2px;
+      margin-bottom: 20px;
+    }
+
+    .section-intro {
+      max-width: 680px;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    /* Problem */
+
+    .problem-grid {
+      margin-top: 48px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .problem {
+      padding: 26px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--bg-soft);
+    }
+
+    .problem-number {
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .problem h3 {
+      font-size: 20px;
+      margin-bottom: 8px;
+    }
+
+    .problem p {
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    /* Services */
+
+    .services-grid {
+      margin-top: 50px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .service {
+      padding: 30px;
+      min-height: 235px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      transition: 0.2s ease;
+    }
+
+    .service:hover {
+      transform: translateY(-3px);
+      background: var(--card-hover);
+      border-color: rgba(103,232,249,0.22);
+    }
+
+    .service-number {
+      font-size: 12px;
+      color: var(--accent);
+      font-weight: 700;
+      margin-bottom: 35px;
+    }
+
+    .service h3 {
+      font-size: 21px;
+      margin-bottom: 10px;
+    }
+
+    .service p {
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    /* Who */
+
+    .audience-grid {
+      margin-top: 50px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .audience {
+      padding: 25px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--bg-soft);
+    }
+
+    .audience h3 {
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+
+    .audience p {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    /* Process */
+
+    .process {
+      margin-top: 55px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .process-step {
+      padding: 30px;
+      border-right: 1px solid var(--line);
+      background: var(--bg-soft);
+    }
+
+    .process-step:last-child {
+      border-right: none;
+    }
+
+    .step-number {
+      font-size: 12px;
+      color: var(--accent);
+      font-weight: 700;
+      margin-bottom: 35px;
+    }
+
+    .process-step h3 {
+      font-size: 19px;
+      margin-bottom: 10px;
+    }
+
+    .process-step p {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    /* About */
+
+    .about-layout {
+      display: grid;
+      grid-template-columns: 0.8fr 1.2fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .about-box {
+      padding: 30px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--card);
+    }
+
+    .about-box strong {
+      display: block;
+      font-size: 19px;
+      margin-bottom: 10px;
+    }
+
+    .about-box p {
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .about-copy p {
+      color: var(--muted);
+      font-size: 17px;
+      margin-bottom: 18px;
+    }
+
+    /* Contact */
+
+    .contact {
+      text-align: center;
+      padding: 115px 0;
+    }
+
+    .contact .section-heading {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .contact .section-intro {
+      margin: 0 auto 35px;
+    }
+
+    .contact-note {
+      margin-top: 22px;
+      color: #738298;
+      font-size: 13px;
+    }
+
+    /* Footer */
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 30px 0;
+      color: #718096;
+      font-size: 13px;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    /* Mobile */
+
+    @media (max-width: 850px) {
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        padding: 80px 0;
+      }
+
+      .hero h1 {
+        letter-spacing: -2.5px;
+      }
+
+      .services-grid,
+      .audience-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .process {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .process-step:nth-child(2) {
+        border-right: none;
+      }
+
+      .process-step:nth-child(-n+2) {
+        border-bottom: 1px solid var(--line);
+      }
+
+      .about-layout {
+        grid-template-columns: 1fr;
+        gap: 35px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        width: min(100% - 28px, var(--max-width));
+      }
+
+      .hero h1 {
+        font-size: 47px;
+      }
+
+      .hero p {
+        font-size: 17px;
+      }
+
+      section {
+        padding: 70px 0;
+      }
+
+      .problem-grid,
+      .services-grid,
+      .audience-grid,
+      .process {
+        grid-template-columns: 1fr;
+      }
+
+      .process-step {
+        border-right: none;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .process-step:last-child {
+        border-bottom: none;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navigation -->
+
+  <nav>
+    <div class="container nav-inner">
+      <a href="#" class="logo">
+        Pipeline<span>Ops</span>Studio
+      </a>
+
+      <div class="nav-links">
+        <a href="#services">Services</a>
+        <a href="#process">How We Work</a>
+        <a href="#who">Who We Help</a>
+        <a href="#about">About</a>
+        <a href="#contact" class="nav-cta">Get in touch</a>
+      </div>
+    </div>
+  </nav>
+
+
+  <!-- Hero -->
+
+  <header class="hero">
+    <div class="container">
+
+      <div class="eyebrow">
+        CRM & Revenue Operations
+      </div>
+
+      <h1>
+        Turn your CRM into
+        <span>a sales operating system.</span>
+      </h1>
+
+      <p>
+        PipelineOpsStudio helps growing B2B teams bring structure to
+        Salesforce, HubSpot, sales pipelines, automation, and CRM operations.
+      </p>
+
+      <div class="hero-buttons">
+        <a href="#contact" class="button button-primary">
+          Start a conversation
+        </a>
+
+        <a href="#services" class="button button-secondary">
+          Explore services
+        </a>
+      </div>
+
+    </div>
+  </header>
+
+
+  <!-- Problem -->
+
+  <section>
+    <div class="container">
+
+      <div class="section-label">The problem</div>
+
+      <h2 class="section-heading">
+        Your CRM shouldn't become the bottleneck.
+      </h2>
+
+      <p class="section-intro">
+        As sales teams grow, CRM systems can become harder to manage,
+        harder to trust, and harder to improve.
+      </p>
+
+      <div class="problem-grid">
+
+        <div class="problem">
+          <div class="problem-number">01</div>
+          <h3>Messy CRM data</h3>
+          <p>
+            Inconsistent records, duplicate data and unclear ownership
+            make reliable reporting difficult.
+          </p>
+        </div>
+
+        <div class="problem">
+          <div class="problem-number">02</div>
+          <h3>Unclear pipelines</h3>
+          <p>
+            Sales stages and processes don't always reflect how your
+            team actually sells.
+          </p>
+        </div>
+
+        <div class="problem">
+          <div class="problem-number">03</div>
+          <h3>Broken automation</h3>
+          <p>
+            Manual work and disconnected tools create unnecessary
+            friction for sales teams.
+          </p>
+        </div>
+
+        <div class="problem">
+          <div class="problem-number">04</div>
+          <h3>Limited visibility</h3>
+          <p>
+            Leadership needs useful answers from the CRM—not another
+            collection of dashboards nobody trusts.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Services -->
+
+  <section id="services">
+    <div class="container">
+
+      <div class="section-label">Capabilities</div>
+
+      <h2 class="section-heading">
+        CRM and revenue operations, built around your business.
+      </h2>
+
+      <p class="section-intro">
+        A focused set of services covering the systems and processes
+        that support modern B2B sales teams.
+      </p>
+
+      <div class="services-grid">
+
+        <div class="service">
+          <div class="service-number">01 / SALESFORCE</div>
+          <h3>Salesforce Operations</h3>
+          <p>
+            CRM configuration, administration, process design and
+            ongoing optimization.
+          </p>
+        </div>
+
+        <div class="service">
+          <div class="service-number">02 / HUBSPOT</div>
+          <h3>HubSpot Operations</h3>
+          <p>
+            CRM setup, configuration, workflows and improvements
+            across your sales process.
+          </p>
+        </div>
+
+        <div class="service">
+          <div class="service-number">03 / CRM</div>
+          <h3>CRM Cleanup</h3>
+          <p>
+            Improve data structure, consistency, governance and
+            day-to-day CRM usability.
+          </p>
+        </div>
+
+        <div class="service">
+          <div class="service-number">04 / PIPELINE</div>
+          <h3>Pipeline Operations</h3>
+          <p>
+            Bring greater structure to sales stages, processes,
+            reporting and pipeline management.
+          </p>
+        </div>
+
+        <div class="service">
+          <div class="service-number">05 / AUTOMATION</div>
+          <h3>Automation & Integrations</h3>
+          <p>
+            Reduce repetitive work and connect the systems that
+            support your revenue process.
+          </p>
+        </div>
+
+        <div class="service">
+          <div class="service-number">06 / REVOPS</div>
+          <h3>Fractional RevOps</h3>
+          <p>
+            Ongoing operational support for teams that need CRM and
+            revenue operations without a full-time hire.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Who We Help -->
+
+  <section id="who">
+    <div class="container">
+
+      <div class="section-label">Who we help</div>
+
+      <h2 class="section-heading">
+        Built for growing B2B teams.
+      </h2>
+
+      <p class="section-intro">
+        Especially teams that have outgrown spreadsheets, ad-hoc
+        processes, or a CRM that no longer reflects the business.
+      </p>
+
+      <div class="audience-grid">
+
+        <div class="audience">
+          <h3>B2B SaaS</h3>
+          <p>
+            Growing software companies building repeatable sales operations.
+          </p>
+        </div>
+
+        <div class="audience">
+          <h3>Professional Services</h3>
+          <p>
+            Consulting, IT, recruiting and service businesses managing
+            complex sales pipelines.
+          </p>
+        </div>
+
+        <div class="audience">
+          <h3>Sales-led B2B</h3>
+          <p>
+            Teams where pipeline visibility and sales process discipline
+            directly matter.
+          </p>
+        </div>
+
+        <div class="audience">
+          <h3>Growing Teams</h3>
+          <p>
+            Founder-led businesses moving toward a more structured
+            revenue operation.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Process -->
+
+  <section id="process">
+    <div class="container">
+
+      <div class="section-label">How we work</div>
+
+      <h2 class="section-heading">
+        A practical path from CRM complexity to clarity.
+      </h2>
+
+      <p class="section-intro">
+        Start with understanding the problem. Then improve the system,
+        the process, and the way your team operates.
+      </p>
+
+      <div class="process">
+
+        <div class="process-step">
+          <div class="step-number">01</div>
+          <h3>Assess</h3>
+          <p>
+            Understand the CRM, sales process, data and operational gaps.
+          </p>
+        </div>
+
+        <div class="process-step">
+          <div class="step-number">02</div>
+          <h3>Architect</h3>
+          <p>
+            Design processes, CRM structure and automation around the
+            way the business sells.
+          </p>
+        </div>
+
+        <div class="process-step">
+          <div class="step-number">03</div>
+          <h3>Implement</h3>
+          <p>
+            Configure, organize and improve the systems that support
+            your revenue process.
+          </p>
+        </div>
+
+        <div class="process-step">
+          <div class="step-number">04</div>
+          <h3>Operate</h3>
+          <p>
+            Continue improving the CRM and operational processes as
+            the business evolves.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- About -->
+
+  <section id="about">
+    <div class="container about-layout">
+
+      <div>
+        <div class="section-label">About</div>
+
+        <h2 class="section-heading">
+          A focused approach to CRM operations.
+        </h2>
+      </div>
+
+      <div class="about-copy">
+
+        <p>
+          PipelineOpsStudio is being built around a simple idea:
+          your CRM should support the way your business operates,
+          not create more operational work.
+        </p>
+
+        <p>
+          The focus is on practical CRM systems, cleaner processes,
+          useful automation and better visibility across the sales
+          pipeline.
+        </p>
+
+        <p>
+          As PipelineOpsStudio grows, this site will evolve alongside
+          the projects, capabilities and solutions we build.
+        </p>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- Contact -->
+
+  <section id="contact" class="contact">
+    <div class="container">
+
+      <div class="section-label">Let's talk</div>
+
+      <h2 class="section-heading">
+        Have a CRM or pipeline problem to solve?
+      </h2>
+
+      <p class="section-intro">
+        Tell us what you're trying to improve. We'll use the
+        information to understand the problem and determine the
+        next step.
+      </p>
+
+      <a href="#contact" class="button button-primary">
+        Start a conversation
+      </a>
+
+      <p class="contact-note">
+        Contact options will be added during the launch setup.
+      </p>
+
+    </div>
+  </section>
+
+
+  <!-- Footer -->
+
+  <footer>
+    <div class="container footer-inner">
+
+      <div>
+        © 2026 PipelineOpsStudio
+      </div>
+
+      <div>
+        CRM · Salesforce · HubSpot · Revenue Operations
+      </div>
+
+    </div>
+  </footer>
+
+</body>
+</html>
