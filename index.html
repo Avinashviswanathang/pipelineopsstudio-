@@ -4,24 +4,26 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
- <title>PipelineOpsStudio | CRM & Revenue Operations</title>
+  <title>PipelineOpsStudio | CRM & Revenue Operations</title>
 
-<meta
+  <meta
     name="description"
     content="PipelineOpsStudio helps growing B2B teams turn Salesforce and HubSpot into structured sales operating systems through CRM implementation, cleanup, automation, and RevOps support."
->
+  >
 
-<meta name="robots" content="index, follow">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://pipelineopsstudio.com/">
+  <link rel="icon" type="image/png" href="logo.png">
 
-<link rel="canonical" href="https://pipelineopsstudio.com/">
+  <meta property="og:title" content="PipelineOpsStudio | CRM & Revenue Operations">
+  <meta
+    property="og:description"
+    content="Turn your CRM into a sales operating system. CRM implementation, cleanup, automation, and RevOps support for growing B2B teams."
+  >
+  <meta property="og:url" content="https://pipelineopsstudio.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://pipelineopsstudio.com/logo.png">
 
-<link rel="icon" type="image/png" href="logo.png">
-
-<meta property="og:title" content="PipelineOpsStudio | CRM & Revenue Operations">
-<meta property="og:description" content="Turn your CRM into a sales operating system. CRM implementation, cleanup, automation, and RevOps support for growing B2B teams.">
-<meta property="og:url" content="https://pipelineopsstudio.com/">
-<meta property="og:type" content="website">
-<meta property="og:image" content="https://pipelineopsstudio.com/logo.png">
   <style>
     :root {
       --bg: #07111f;
@@ -45,6 +47,7 @@
 
     html {
       scroll-behavior: smooth;
+      scroll-padding-top: 90px;
     }
 
     body {
@@ -63,6 +66,10 @@
     img {
       max-width: 100%;
       display: block;
+    }
+
+    button {
+      font: inherit;
     }
 
     .container {
@@ -134,6 +141,45 @@
     .nav-cta:hover {
       border-color: rgba(85,227,245,0.5);
       background: rgba(85,227,245,0.05);
+    }
+
+    .mobile-menu-button {
+      display: none;
+      width: 42px;
+      height: 42px;
+      padding: 9px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: transparent;
+      cursor: pointer;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+    }
+
+    .mobile-menu-button span {
+      display: block;
+      width: 100%;
+      height: 2px;
+      border-radius: 2px;
+      background: var(--text);
+      transition: 0.2s ease;
+    }
+
+    .mobile-menu-button[aria-expanded="true"] span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .mobile-menu-button[aria-expanded="true"] span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .mobile-menu-button[aria-expanded="true"] span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    .mobile-menu {
+      display: none;
     }
 
     /* HERO */
@@ -510,12 +556,39 @@
       gap: 20px;
     }
 
-    /* MOBILE */
+    /* TABLET / MOBILE */
 
     @media (max-width: 900px) {
-
       .nav-links {
         display: none;
+      }
+
+      .mobile-menu-button {
+        display: flex;
+      }
+
+      .mobile-menu {
+        display: none;
+        flex-direction: column;
+        gap: 4px;
+        padding: 12px 20px 18px;
+        border-top: 1px solid var(--line);
+        background: var(--bg);
+      }
+
+      .mobile-menu.open {
+        display: flex;
+      }
+
+      .mobile-menu a {
+        padding: 13px 8px;
+        color: var(--muted);
+        text-decoration: none;
+        font-size: 15px;
+      }
+
+      .mobile-menu a:hover {
+        color: var(--text);
       }
 
       .hero {
@@ -555,9 +628,12 @@
     }
 
     @media (max-width: 600px) {
-
       .container {
         width: min(100% - 28px, var(--max-width));
+      }
+
+      .nav-inner {
+        min-height: 68px;
       }
 
       .brand img {
@@ -567,6 +643,11 @@
 
       .brand-name {
         font-size: 17px;
+      }
+
+      .mobile-menu {
+        padding-left: 14px;
+        padding-right: 14px;
       }
 
       .hero h1 {
@@ -602,49 +683,74 @@
         flex-direction: column;
       }
     }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        transition: none !important;
+        animation: none !important;
+      }
+    }
+
+    /* KEYBOARD ACCESSIBILITY */
+
+    :focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 4px;
+    }
   </style>
 </head>
 
 <body>
 
   <!-- NAVIGATION -->
-<nav>
-  <div class="container nav-inner">
 
-    <a href="#" class="brand">
-      <img src="logo.png" alt="PipelineOpsStudio logo">
+  <nav>
+    <div class="container nav-inner">
 
-      <div class="brand-name">
-        Pipeline<span>Ops</span>Studio
+      <a href="#" class="brand" aria-label="PipelineOpsStudio home">
+        <img src="logo.png" alt="PipelineOpsStudio logo">
+
+        <div class="brand-name">
+          Pipeline<span>Ops</span>Studio
+        </div>
+      </a>
+
+      <div class="nav-links">
+        <a href="#services">Services</a>
+        <a href="#process">How We Work</a>
+        <a href="#who">Who We Help</a>
+        <a href="#about">About</a>
+        <a href="#contact" class="nav-cta">Get in touch</a>
       </div>
-    </a>
 
-    <!-- Desktop navigation -->
-    <div class="nav-links">
+      <button
+        class="mobile-menu-button"
+        type="button"
+        aria-label="Open navigation menu"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+    </div>
+
+    <div class="mobile-menu" id="mobile-menu">
       <a href="#services">Services</a>
       <a href="#process">How We Work</a>
       <a href="#who">Who We Help</a>
       <a href="#about">About</a>
-      <a href="#contact" class="nav-cta">Get in touch</a>
+      <a href="#contact">Get in touch</a>
     </div>
-
-    <!-- Mobile navigation -->
-    <button class="mobile-menu-button" type="button" aria-label="Open navigation menu" aria-expanded="false">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
-
-  </div>
-
-  <div class="mobile-menu">
-    <a href="#services">Services</a>
-    <a href="#process">How We Work</a>
-    <a href="#who">Who We Help</a>
-    <a href="#about">About</a>
-    <a href="#contact">Get in touch</a>
-  </div>
-</nav>
+  </nav>
 
 
   <!-- HERO -->
@@ -1029,8 +1135,10 @@
         information to understand the problem and determine the next step.
       </p>
 
-      <a href="mailto:hello@pipelineopsstudio.com"
-         class="button button-primary">
+      <a
+        href="mailto:hello@pipelineopsstudio.com?subject=PipelineOpsStudio%20CRM%20Inquiry"
+        class="button button-primary"
+      >
         Start a conversation
       </a>
 
@@ -1060,6 +1168,41 @@
     </div>
 
   </footer>
+
+
+  <!-- MOBILE MENU SCRIPT -->
+
+  <script>
+    const menuButton = document.querySelector(".mobile-menu-button");
+    const mobileMenu = document.querySelector(".mobile-menu");
+    const mobileLinks = document.querySelectorAll(".mobile-menu a");
+
+    function closeMobileMenu() {
+      mobileMenu.classList.remove("open");
+      menuButton.setAttribute("aria-expanded", "false");
+      menuButton.setAttribute("aria-label", "Open navigation menu");
+    }
+
+    menuButton.addEventListener("click", function () {
+      const isOpen = mobileMenu.classList.toggle("open");
+
+      menuButton.setAttribute("aria-expanded", String(isOpen));
+      menuButton.setAttribute(
+        "aria-label",
+        isOpen ? "Close navigation menu" : "Open navigation menu"
+      );
+    });
+
+    mobileLinks.forEach(function (link) {
+      link.addEventListener("click", closeMobileMenu);
+    });
+
+    window.addEventListener("resize", function () {
+      if (window.innerWidth > 900) {
+        closeMobileMenu();
+      }
+    });
+  </script>
 
 </body>
 </html>
